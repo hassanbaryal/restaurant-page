@@ -3,7 +3,5 @@
 
 const container = document.querySelector('#content');
 
-setTimeout(() => {
-    container.textContent = 'Hello there';
-}, 5000);
-
+console.log('Hello there');
+console.log('Hello there');
