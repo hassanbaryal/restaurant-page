@@ -1,10 +1,13 @@
 import './styles/style.css';
+import './styles/home.css';
 import yogurtPng from './assets/frozen-yogurt.png';
+import createHomePage from './home';
+
+const body = document.querySelector('body');
+const contentDiv = document.createElement('div');
 
 // Creates initial elements on webpage load (header, content container)
 (() => {
-    const body = document.querySelector('body');
-
     // Create header element and its children (logo, butttons)
     const newHeader = document.createElement('header');
     // logo
@@ -37,14 +40,41 @@ import yogurtPng from './assets/frozen-yogurt.png';
     newHeader.appendChild(bannerDiv);
     newHeader.appendChild(pgBtns);
     // Create content container
-    const contentDiv = document.createElement('div');
     contentDiv.id = 'content';
     // Append header and content container to body
     body.appendChild(newHeader);
     body.appendChild(contentDiv);
-
-
 })(); 
+
+const pageBtns = document.querySelectorAll('.page-btns button');
+
+pageBtns.forEach((btn) => {btn.addEventListener('click', (e) => {changeContent(e.target);})});
+
+
+
+
+
+
+const clearContent = () => {contentDiv.innerHTML = '';};
+
+// This function changes the content
+const changeContent = (btnPressed) => {
+    if (!btnPressed.classList.contains('filled')){
+        // Remove child elements of content container
+        clearContent();
+        // Unfill previously selected button
+        pageBtns.forEach(btn => {if(btn.classList.contains('filled')){
+            btn.classList.toggle('filled');
+        };});
+
+        btnPressed.classList.toggle('filled');
+        // Fill content container based on button pressed
+        if (btnPressed.textContent == 'Home') {
+            createHomePage();
+        };
+    }
+    
+};
 
 // const container = document.querySelector('#content');
 // const header = document.querySelector('header');
